@@ -18,7 +18,7 @@ public class StudentService {
         this.students.add(student);
         return student;
     }
-    private List<Student> getStudents() {
+    public List<Student> getStudents() {
         return this.students;
     }
 

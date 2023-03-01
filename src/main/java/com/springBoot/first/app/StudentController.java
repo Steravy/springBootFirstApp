@@ -2,14 +2,12 @@ package com.springBoot.first.app;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/student")
 public class StudentController {
 
     private StudentService studentService;
@@ -19,15 +17,16 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @GetMapping("/student")
-    public Student getStudent() {
-        Student student = new Student("Stefan", "Vitoria");
-        student.setId(0);
-        student.setAge(20);
-        return student;
+    @GetMapping
+    public ResponseEntity<List<Student>> getAll() {
+
+//        Student student = new Student("Stefan", "Vitoria");
+//        student.setId(0);
+//        student.setAge(20);
+        return ResponseEntity.ok(studentService.getStudents());
     }
 
-    @PostMapping("/student")
+    @PostMapping
     public ResponseEntity<Student> create(@RequestBody Student student) {
         return ResponseEntity.ok(studentService.create(student));
     }
