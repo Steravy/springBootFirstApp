@@ -46,7 +46,23 @@ public class StudentController {
 
         Optional<Student> student = studentService.getByFirstAndLastName(firstName, lastName);
 
-        return student.isPresent() ? ResponseEntity.ok(student.get()) : new ResponseEntity<>("Student not found", HttpStatus.NOT_FOUND);
+        return student.isPresent() ? ResponseEntity.ok(student.get()) :
+                new ResponseEntity<>(String.format("Student not found with first name: %s and last name: %s",
+                        firstName, lastName), HttpStatus.NOT_FOUND);
+
+    }
+
+    //using query
+
+    public ResponseEntity<?> getByFirstAndLastNameParams(@PathParam("firstName") String firstName, @PathParam("lastName") String lastName) {
+        Optional<Student> student = studentService.getByFirstAndLastName(firstName, lastName);
+
+        if(student.isPresent()) {
+
+            return ResponseEntity.ok(student.get());
+        }
+        return new ResponseEntity<>(String.format("Student not found with first name: %s and last name: %s",
+                firstName, lastName), HttpStatus.NOT_FOUND);
 
     }
 
