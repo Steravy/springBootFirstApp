@@ -31,4 +31,13 @@ public class StudentService {
         return Optional.empty();
     }
 
+    public Optional<Student> getByFirstAndLastName(String firstName, String lastName) {
+        for (Student student : students) {
+            if (student.getFirstName().equals(firstName) && student.getLastName().equals(lastName)) {
+                return Optional.of(student);
+            }
+        }
+        return Optional.empty();
+    }
+
 }
