@@ -2,14 +2,12 @@ package com.springBoot.first.app;
 
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class StudentService {
 
-    private List<Student> students = new LinkedList<>();
+    private final List<Student> students = new LinkedList<>();
     private int id = 0;
 
     public Student create(Student student) {
@@ -20,6 +18,17 @@ public class StudentService {
     }
     public List<Student> getStudents() {
         return this.students;
+    }
+
+    public Optional<Student> getStudent(int id) {
+
+        for (Student student : students) {
+
+            if (student.getId() == id) {
+                return Optional.of(student);
+            }
+        }
+        return Optional.empty();
     }
 
 }
