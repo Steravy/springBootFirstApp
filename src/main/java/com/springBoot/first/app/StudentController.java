@@ -31,7 +31,7 @@ public class StudentController {
 
         Optional<Student> student = studentService.getStudent(id);
 
-       return student.isPresent() ? ResponseEntity.ok(student.get()) :
+        return student.isPresent() ? ResponseEntity.ok(student.get()) :
                 new ResponseEntity<>("Student not found", HttpStatus.NOT_FOUND);
 
 //        if (student.isPresent()) {
@@ -42,7 +42,7 @@ public class StudentController {
     }
 
     @GetMapping("/{firstName}/{lastName}")
-    public ResponseEntity<?> getByfirstOrLastName(@PathVariable("firstName") String firstName,@PathVariable("lastName") String lastName) {
+    public ResponseEntity<?> getByfirstOrLastName(@PathVariable("firstName") String firstName, @PathVariable("lastName") String lastName) {
 
         Optional<Student> student = studentService.getByFirstAndLastName(firstName, lastName);
 
@@ -54,10 +54,14 @@ public class StudentController {
 
     //using query
 
-    public ResponseEntity<?> getByFirstAndLastNameParams(@PathParam("firstName") String firstName, @PathParam("lastName") String lastName) {
+    public ResponseEntity<?> getByFirstAndLastNameParams(@RequestParam(name = "firstName") String firstName, @RequestParam(name = "lastName") String lastName) {
+        System.out.println(firstName);
+        System.out.println("____________________________________");
+        System.out.println(lastName);
+
         Optional<Student> student = studentService.getByFirstAndLastName(firstName, lastName);
 
-        if(student.isPresent()) {
+        if (student.isPresent()) {
 
             return ResponseEntity.ok(student.get());
         }
