@@ -53,7 +53,7 @@ public class StudentController {
     }
 
     //using query
-
+    @GetMapping("/search")
     public ResponseEntity<?> getByFirstAndLastNameParams(@RequestParam(name = "firstName") String firstName, @RequestParam(name = "lastName") String lastName) {
         System.out.println(firstName);
         System.out.println("____________________________________");
